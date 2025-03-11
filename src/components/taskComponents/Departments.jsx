@@ -19,7 +19,7 @@ export default function Departments(){
         );
       };
       return (
-        <div className="chooseDepartments">
+        <div className="chooseDepartments filterTask">
           <div>
             {departments.map((dep) => (
               <div key={dep.id}>

@@ -28,7 +28,7 @@ export default function Employees(){
       };
       
       return (
-        <div className="chooseEmployees">
+        <div className="chooseEmployees filterTask">
           <div>
             {employees.map((emp) => (
               <div key={emp.id}>

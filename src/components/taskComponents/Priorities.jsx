@@ -19,7 +19,7 @@ export default function Priorities(){
         );
       };
       return (
-        <div className="choosePriorities">
+        <div className="choosePriorities filterTask">
           <div>
             {priorities.map((pri) => (
               <div key={pri.id}>

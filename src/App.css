@@ -48,6 +48,8 @@ input[type="checkbox"] {
   outline: none;
   transition: outline 0.1s;
   border-radius: 5px;
+  margin-bottom: -5px;
+  margin-right: 10px;
 }
 
 input[type="checkbox"]:checked {
@@ -72,7 +74,6 @@ input[type="checkbox"]:not(:disabled):checked {
   letter-spacing: 0%;
   text-align: center;
   padding:  10px 30px;
-  margin-left: 120px;
   margin-top: 40px;
 }
 .chooseFilter li svg{
@@ -80,4 +81,16 @@ input[type="checkbox"]:not(:disabled):checked {
 }
 .chooseFilter li{
   cursor: pointer;
+}
+
+.filterTask{
+  margin-top: 20px;
+  border: 1px solid #8338EC;
+  line-height: 2;
+  padding: 20px 30px 80px 30px;
+  
+}
+.filters{
+  margin-left: 120px;
+  width: 560px;
 }

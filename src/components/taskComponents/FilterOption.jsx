@@ -11,22 +11,36 @@ export default function FilterOption(){
 
     function depShow(){
         setDep(prev => !prev)
+        setEmp(false)
+        setPri(false)
     }
     function priShow(){
         setPri(prev => !prev)
+        setEmp(false)
+        setDep(false)
     }
     function empShow(){
         setEmp(prev => !prev)
+        setDep(false)
+        setPri(false)
     }
     console.log(dep)
 
    return (
     <>
+    <div className="filters">
+
+   
         <ul className="chooseFilter">
             <li onClick={depShow}>დეპარტამენტი <ChevronDown/></li>
             <li onClick={priShow}>პრიორიტეტი <ChevronDown/></li>
             <li onClick={empShow}>თანამშრომელი <ChevronDown/></li>
         </ul>
+        {dep ? <Departments /> : null}
+        {pri ? <Priorities /> : null}
+        {emp ? <Employees /> : null}
+        </div>
+        
     </>
    )
 };
