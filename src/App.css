@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    
+}
+.header-parent{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 120px;
+}
+.header-parent button{
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 30px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border: 1px solid #8338EC;
+  outline: none;
+  cursor: pointer;
+
+}
+.buttons :nth-child(1){
+    background: white;
+}
+
+.buttons :nth-child(2){
+  background: #8338EC;
+  color: white;
+}
+
+.avatar{
+  width: 28px;
+  border-radius: 20px;
+  margin-bottom: -10px;
+}
+input[type="checkbox"] {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid #8338EC;
+  appearance: none;
+  background-color: transparent;
+  outline: none;
+  transition: outline 0.1s;
+  border-radius: 5px;
+}
+
+input[type="checkbox"]:checked {
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2px;
+}
+input[type="checkbox"]:not(:disabled):checked {
+  background-image: url("../src/images/Vector.png");
+  
+}
+
+.chooseFilter{
+  border: 1px solid #E4E8EB;
+  display: flex;
+  gap: 45px;
+  list-style: none;
+  width: fit-content; 
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  padding:  10px 30px;
+  margin-left: 120px;
+  margin-top: 40px;
+}
+.chooseFilter li svg{
+  margin-bottom: -7px ;
+}
+.chooseFilter li{
+  cursor: pointer;
+}
