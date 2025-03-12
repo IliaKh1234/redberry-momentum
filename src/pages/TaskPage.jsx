@@ -8,7 +8,6 @@ export default function TaskPage(){
        <h1 style={{ marginLeft: "120px" }}>დავალებების გვერდი</h1>
         <FilterOption/>
         <Statuses/>
-        <GetTasks/>
         </>
     )
 }
