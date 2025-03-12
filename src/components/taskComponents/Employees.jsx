@@ -43,6 +43,7 @@ export default function Employees(){
                 {`${emp.name} ${emp.surname}`}
               </div>
             ))}
+            <button className="subFilter">არჩევა</button>
           </div>
         </div>
         

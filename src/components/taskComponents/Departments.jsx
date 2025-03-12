@@ -33,6 +33,7 @@ export default function Departments(){
                 {dep.name}
               </div>
             ))}
+            <button  className="subFilter">არჩევა</button>
           </div>
         </div>
       );

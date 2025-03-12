@@ -4,10 +4,12 @@ import Priorities from "./Priorities";
 import Employees from "./Employees";
 import { ChevronDown } from 'lucide-react';
 
+
 export default function FilterOption(){
     const [dep, setDep] = useState(false)
     const [pri, setPri] = useState(false)
     const [emp, setEmp] = useState(false)
+
 
     function depShow(){
         setDep(prev => !prev)
@@ -28,19 +30,17 @@ export default function FilterOption(){
 
    return (
     <>
+    
     <div className="filters">
-
-   
         <ul className="chooseFilter">
-            <li onClick={depShow}>დეპარტამენტი <ChevronDown/></li>
-            <li onClick={priShow}>პრიორიტეტი <ChevronDown/></li>
-            <li onClick={empShow}>თანამშრომელი <ChevronDown/></li>
+            <li className={dep ? "active" : null} onClick={depShow}>დეპარტამენტი <ChevronDown/></li>
+            <li className={pri ? "active" : null} onClick={priShow}>პრიორიტეტი <ChevronDown/></li>
+            <li className={emp ? "active" : null} onClick={empShow}>თანამშრომელი <ChevronDown/></li>
         </ul>
         {dep ? <Departments /> : null}
         {pri ? <Priorities /> : null}
         {emp ? <Employees /> : null}
         </div>
-        
     </>
    )
 };

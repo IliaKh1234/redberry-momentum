@@ -33,6 +33,7 @@ export default function Priorities(){
                 {pri.name}
               </div>
             ))}
+            <button className="subFilter">არჩევა</button>
           </div>
         </div>
       );
