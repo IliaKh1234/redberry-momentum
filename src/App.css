@@ -89,7 +89,10 @@ input[type="checkbox"]:not(:disabled):checked {
   border: 1px solid #8338EC;
   line-height: 2;
   padding: 20px 30px 60px 30px;
-  position: relative;
+  position: absolute;
+  background: white;
+  width: 560px;
+  
 }
 .filters{
   margin-left: 120px;
@@ -117,7 +120,8 @@ input[type="checkbox"]:not(:disabled):checked {
 }
 .statuses{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 55px;
   margin-top: 40px;
 }
 
@@ -130,6 +134,7 @@ input[type="checkbox"]:not(:disabled):checked {
   flex-direction: column;
   width: 381px;
   text-align: center;
+  
 }
 
 .status-1{
