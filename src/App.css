@@ -1,9 +1,9 @@
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    
 }
 .header-parent{
   display: flex;
@@ -113,4 +113,42 @@ input[type="checkbox"]:not(:disabled):checked {
 }
 .active{
   color: #8338EC;
+}
+.statuses{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.statuses div{
+  border-radius: 10px;
+  padding: 15px 60px;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-1{
+  background: #F7BC30;
+}
+
+.status-2{
+  background: #FB5607;
+}
+.status-3{
+  background: #FF006E;
+}
+.status-4{
+  background: #3A86FF;
+}
+
+.task{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+.task-header{
+  display: flex;
+  justify-content: space-around;
 }

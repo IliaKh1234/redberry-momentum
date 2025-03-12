@@ -10,13 +10,19 @@ export default function Statuses(){
             
     }, []);  
     
-    const statusElements = statuses.map((status) => (
-        <select key={status.id}>
-            {status.name} 
-        </select>
-    ));
     return (
         <>
+            <div className="statuses">
+            {statuses.length > 0 ? (
+                statuses.map((status) => (
+                    <div key={status.id} className={`status-${status.id} status`}>
+                        {status.name} 
+                    </div>
+                ))
+            ) : (
+                <p>Loading statuses...</p>
+            )}
+            </div>
         </>
     );
     
