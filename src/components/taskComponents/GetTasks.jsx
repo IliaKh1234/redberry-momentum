@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { ka } from "date-fns/locale";
 import commentsIcon from '../../images/Comments.png';
+import { useNavigate } from "react-router-dom";
 
 export default function GetTasks({ id }) {
   const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/tasks", {
@@ -44,6 +46,9 @@ export default function GetTasks({ id }) {
 // useEffect(() => {
 //     deleteUser("86");
 // }, []);
+const navigateToTaskDetail = (taskId) => {
+  navigate(`/task/${taskId}`);  // Navigate to TaskDetail page with the task id
+};
   const abbreviateText = (text) => {
     const abbreviations = {
       "ადმინისტრაციის დეპარტამენტი": "ადმინისტრაცია",
@@ -75,7 +80,7 @@ export default function GetTasks({ id }) {
     <div>
       {tasks.length > 0 ? (
         tasks.map((task) => (
-          <div style={{border: `1px solid ${borderChoose(id)}`}} key={task.id} className={`task-${task.id} task`}>
+          <div onClick={() => navigateToTaskDetail(task.id)} style={{border: `1px solid ${borderChoose(id)}`}} key={task.id} className={`task-${task.id} task`}>
             <div className={`task-header-${task.id} task-header`}>
               <div style={{ display: "flex", gap: "10px" }}>
                 <div style={{ padding: "5px 10px", borderRadius: "10px" }} className={getPriorityClass(task.priority.name)}>
