@@ -45,7 +45,7 @@ export default function GetTasks({ id, name }) {
 // };
 // // Delete user
 // useEffect(() => {
-//     deleteUser("86");
+//     deleteUser("148");
 // }, []);
 const navigateToTaskDetail = (taskId) => {
   navigate(`/task/${taskId}`); 

@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: FiraGo;
 }
 button:hover{
   background: #B588F4;
@@ -83,6 +84,7 @@ input[type="checkbox"]:not(:disabled):checked {
   font-size: 16px;
   padding: 10px 30px;
   margin-top: 40px;
+  width: 590px;
 }
 
 .chooseFilter li svg {
@@ -210,6 +212,7 @@ input[type="checkbox"]:not(:disabled):checked {
   display: flex;
   justify-content: space-around;
   margin-top: 70px;
+  max-height: 450px;
 }
 
 .task-detail-header {
@@ -219,7 +222,7 @@ input[type="checkbox"]:not(:disabled):checked {
 }
 
 .task-detail-details {
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 /* Task Detail Status */
@@ -237,7 +240,9 @@ input[type="checkbox"]:not(:disabled):checked {
   gap: 10px;
   border-radius: 5px;
   border-width: 1px;
-  padding: 10px 14px;
+  padding: 10px 90px 10px 10px;
+  width: 350px;
+  outline: none;
 }
 
 /* Task Description */
@@ -249,6 +254,7 @@ input[type="checkbox"]:not(:disabled):checked {
 .comments-parent{
   width: 741px;
   background: #FAF7FE;
+  height: 700px;
 }
 #writeComment{
   width: 651px;
@@ -258,6 +264,7 @@ input[type="checkbox"]:not(:disabled):checked {
   padding: 18px 20px 15px 20px;
   resize: none;
   border: 1px solid #ADB5BD;
+  outline: none;
 }
 .write-comment{
   display: flex;
@@ -265,6 +272,8 @@ input[type="checkbox"]:not(:disabled):checked {
   align-items: center;
   margin-top: 30px;
   position: relative;
+  overflow-y: auto;
+
 }
 .comment-btn{
   width: 155px;
@@ -293,7 +302,9 @@ input[type="checkbox"]:not(:disabled):checked {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 40px;
+  margin-left: 47px;
+  overflow-y: auto;
+  max-height: 400px;
 }
 .comment-author-name{
   margin-left: 10px;
@@ -312,4 +323,23 @@ input[type="checkbox"]:not(:disabled):checked {
   letter-spacing: 0%;
   margin-top: 10px;
 
+}
+.reply-comment button{
+  background: none;
+  outline: none;
+  border: none;
+  color: #8338EC;
+  margin-left: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.reply-comment button:hover{
+  color: #B588F4;
+}
+.comment-item{
+  margin-top: 30px ;
+}
+.nested-replies{
+  margin-left: 40px;
+  margin-top: -20px;
 }
