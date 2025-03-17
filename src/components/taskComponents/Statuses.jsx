@@ -9,7 +9,7 @@ export default function Statuses() {
       .then((res) => res.json())
       .then((data) => setStatuses(data));
   }, []);
-
+  console.log(statuses)
   return (
     <>
       <div className="statuses">
@@ -20,8 +20,8 @@ export default function Statuses() {
             <div key={status.id} className={`status-${status.id} status`}>
               <h3>{status.name}</h3>
             </div>
-            <div className="tasks-container">
-                <GetTasks id={status.id} />
+            <div className={`tasks-container tasks-container-${status.id}`}>
+                <GetTasks name={status.name} id={status.id} />
               </div>
               </div>
             </>

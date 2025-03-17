@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/LayOut";
 import TaskPage from '../src/pages/TaskPage'
-import TaskDetailPage from "./pages/TaskDetail";
+import TaskDetailPage from "./pages/TaskDetailPage";
 
 export default function App() {
     return (

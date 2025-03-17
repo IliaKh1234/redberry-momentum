@@ -4,7 +4,7 @@ import { ka } from "date-fns/locale";
 import commentsIcon from '../../images/Comments.png';
 import { useNavigate } from "react-router-dom";
 
-export default function GetTasks({ id }) {
+export default function GetTasks({ id, name }) {
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
 
@@ -18,11 +18,12 @@ export default function GetTasks({ id }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        const filteredTasks = data.filter((task) => task.priority.id === id);
+        const filteredTasks = data.filter((task) => task.status.name === name);
         setTasks(filteredTasks);
       })
       .catch((error) => console.error("Error fetching Tasks:", error));
   }, [id]);
+  
 
 //   const deleteUser = (id) => {
 //     fetch(`https://momentum.redberryinternship.ge/api/tasks/${id}`, {
@@ -47,7 +48,7 @@ export default function GetTasks({ id }) {
 //     deleteUser("86");
 // }, []);
 const navigateToTaskDetail = (taskId) => {
-  navigate(`/task/${taskId}`);  // Navigate to TaskDetail page with the task id
+  navigate(`/task/${taskId}`); 
 };
   const abbreviateText = (text) => {
     const abbreviations = {
