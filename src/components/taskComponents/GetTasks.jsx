@@ -25,7 +25,7 @@ export default function GetTasks({ id, name }) {
   }, [id]);
   
 
-//   const deleteUser = (id) => {
+//   const deleteUser = (t) => {
 //     fetch(`https://momentum.redberryinternship.ge/api/tasks/${id}`, {
 //         method: "DELETE",
 //         headers: {
@@ -45,7 +45,7 @@ export default function GetTasks({ id, name }) {
 // };
 // // Delete user
 // useEffect(() => {
-//     deleteUser("148");
+//     deleteUser(1563);
 // }, []);
 const navigateToTaskDetail = (taskId) => {
   navigate(`/task/${taskId}`); 

@@ -2,10 +2,12 @@ import logo from '../images/logo.png'
 import hourGlass from "../images/Hourglass.png"
 import { useState, useEffect } from "react";
 import AddEmployee from './taskComponents/AddEmployee';
+import { useNavigate, Link } from "react-router-dom";
+
 
 export default function Header(){
     const [addOpen, setAddOpen] = useState(false)
-        console.log(addOpen)
+    const navigate = useNavigate()
         useEffect(() => {
             if (addOpen) {
                 document.body.classList.add("modal-open");
@@ -13,6 +15,12 @@ export default function Header(){
                 document.body.classList.remove("modal-open");
             }
         }, [addOpen]);
+    
+        const handleAddTask = () => {
+            window.location.href = '/create-task'; 
+        }
+
+
     return (
         <>
         <div className={`header-parent ${addOpen ? 'blur' : ''}`}>
@@ -22,12 +30,12 @@ export default function Header(){
             </div>
             <div className='buttons'>
                 <button onClick={() => setAddOpen((prev) => !prev)}>თანამშრომლების შექმნა</button>
-                <button>+ შექმენი ახალი დავალება</button>
+                <button onClick={handleAddTask}>+ შექმენი ახალი დავალება</button>
             </div>
         </div>
             {addOpen ? (
-                        <div className="create-employee-parent" onClick={(e) => e.stopPropagation()}>
-                            <AddEmployee onClose={() => setAddOpen(false)}/>
+                    <div className="create-employee-parent">
+                        <AddEmployee onClose={() => setAddOpen(false)}/>
                     </div>
             ) : null}
         </>

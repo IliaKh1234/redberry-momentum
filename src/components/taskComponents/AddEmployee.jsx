@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import useEmpValidation from "../../hooks/useEmpValidation";
 import { Check, Trash2, ImagePlus } from "lucide-react";
 

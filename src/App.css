@@ -14,6 +14,9 @@ button{
   transition: 0.3s all ease-in-out;
 
 }
+input, select, option, textarea{
+  outline: none;
+}
 
 /* Header Section */
 .header-parent {
@@ -534,4 +537,100 @@ input[type="checkbox"]:not(:disabled):checked {
   padding: 10px 20px;
   gap: 4px;
   background: #8338EC;
+}
+
+/* create task */
+.create-task-box{
+  width: 1684px;
+  height: 750px;
+  top: 206px;
+  left: 118px;
+  border-radius: 4px;
+  border-width: 0.3px;
+  background: #FBF9FFA6;
+  border: 0.3px solid #DDD2FF;
+  margin: auto;
+}
+.add-task-parent input, #chooseDepartment,#chooseEmployeeFor, #taskDescription{
+  width: 550px;
+  height: 45px;
+  border-radius: 5px;
+  border-width: 1px;
+  gap: 10px;
+  padding: 14px;
+  outline: none;
+  border: 1px solid #DEE2E6;
+  resize: none;
+}
+.create-task-parent label{
+  margin: 2px 0;
+}
+.add-task-parent{
+  display: flex;
+  justify-content: space-around;
+  margin-left: -100px;
+  margin-top: 50px;
+}
+#taskDescription{
+    width: 550px;
+  height: 133px;
+  border-radius: 5px;
+  border-width: 1px;
+  gap: 10px;
+  padding: 14px;
+}
+.task-title-parent,
+.task-description-parent,
+.priority-parent,
+.choose-status-parent,
+.choose-department-parent,
+.choose-employee-parent,
+.deadLine-parent{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+#choosePriority,#chooseStatus{
+  width: 259px;
+  height: 46px;
+  border-radius: 5px;
+  border-width: 1px;
+  gap: 6px;
+
+
+}
+#deadLine{
+  width: 318px;
+height: 45px;
+border-radius: 5px;
+border-width: 1px;
+gap: 6px;
+padding: 14px;
+border: 1px solid #DEE2E6;
+}
+.deadLine-parent{
+  margin-top: 212.5px;
+}
+.create-task-btn{
+  width: 208px;
+  height: 42px;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  gap: 4px;
+  outline: none;
+  border: none;
+  background: #8338EC;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  margin-top: 80px;
+  right: 300px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
 }

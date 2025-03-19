@@ -26,7 +26,6 @@ export default function Employees(){
             : prev.filter((id) => id !== value)
         );
       };
-      
       return (
         <div className="chooseEmployees filterTask">
           <div>

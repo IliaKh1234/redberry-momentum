@@ -158,5 +158,3 @@ export default function TaskDetail({taskId}) {
       </div>
   );
 }
-
-// unda gavaketo statusis shecvla
