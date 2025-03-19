@@ -81,23 +81,22 @@ export default function AddEmployee({ onClose }) {
     })
       .then((response) => {
         return response.text(); 
+
       })
       .then((data) => {
         try {
           const parsedData = JSON.parse(data); 
           console.log("Parsed JSON data:", parsedData);
+          onClose()
         } catch (error) {
           console.error("Error parsing response:", error);
         }
       })
       .catch((error) => {
         console.error("Error creating employee:", error);
-      });
-      if(!errors){
-        onClose()
-      }else{
         alert("გთხოვთ შეავსოთ ფორმა")
-      }
+      });
+  
   };
   
 
