@@ -56,12 +56,41 @@ export default function AddTask() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
-        if(formData.chooseEmployeeFor === ""){
-            alert("აირჩიეთ თანამშრომელი");
-        }
-    };
 
+        if (formData.chooseEmployeeFor === "") {
+            alert("აირჩიეთ თანამშრომელი");
+            return;
+        }else{
+            const taskData = {
+                name: formData.taskTitle,
+                description: formData.taskDescription,
+                due_date: formData.deadLine,
+                status_id: formData.chooseStatus,
+                employee_id: formData.chooseEmployeeFor,
+                priority_id: formData.choosePriority,
+            };
+    
+            fetch("https://momentum.redberryinternship.ge/api/tasks", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer 9e685023-d697-49c2-9442-4c707290d2bf`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(taskData), 
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Task created successfully:", data);
+                alert("Task created successfully!");
+            })
+            .catch((error) => {
+                console.error("Error creating task:", error);
+                alert("Error creating task.");
+            });
+        }
+
+        
+    };
     useEffect(() => {
         fetch("https://momentum.redberryinternship.ge/api/priorities")
             .then((res) => res.json())

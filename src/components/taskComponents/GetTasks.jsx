@@ -47,6 +47,7 @@ export default function GetTasks({ id, name }) {
 // useEffect(() => {
 //     deleteUser(1563);
 // }, []);
+console.log(tasks)
 const navigateToTaskDetail = (taskId) => {
   navigate(`/task/${taskId}`); 
 };
@@ -57,7 +58,7 @@ const navigateToTaskDetail = (taskId) => {
       "ფინანსების დეპარტამენტი": "ფინანსები",
       "გაყიდვები და მარკეტინგის დეპარტამენტი": "მარკეტინგი",
       "ლოჯისტიკის დეპარტამენტი": "ლოჯისტიკა",
-      "ტექონოლოგიების დეპარტამენტი": "ტექ",
+      "ტექნოლოგიების დეპარტამენტი": "ტექ",
       "მედიის დეპარტამენტი": "მედია",
     };
     return abbreviations[text] || text;
