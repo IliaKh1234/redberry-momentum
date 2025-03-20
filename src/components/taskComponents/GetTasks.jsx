@@ -2,11 +2,39 @@ import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { ka } from "date-fns/locale";
 import commentsIcon from '../../images/Comments.png';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function GetTasks({ id, name }) {
   const [tasks, setTasks] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams(); 
   const navigate = useNavigate();
+  const [filteredDeps, setFilteredDeps] = useState([])
+  const [filteredPris, setFilteredPris] = useState([])
+  const [filteredEmps, setFilteredEmps] = useState([])
+
+  useEffect(() => {
+    fetch("https://momentum.redberryinternship.ge/api/departments")
+      .then((res) => res.json())
+      .then((data) => setFilteredDeps(data));
+  }, [searchParams])
+
+  useEffect(() => {
+    fetch("https://momentum.redberryinternship.ge/api/priorities")
+      .then((res) => res.json())
+      .then((data) => setFilteredPris(data));
+  }, [searchParams])
+
+  useEffect(() => {
+    fetch("https://momentum.redberryinternship.ge/api/employees", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer 9e685023-d697-49c2-9442-4c707290d2bf`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setFilteredEmps(data))
+  }, [searchParams])
 
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/tasks", {
@@ -18,39 +46,39 @@ export default function GetTasks({ id, name }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        const filteredTasks = data.filter((task) => task.status.name === name);
-        setTasks(filteredTasks);
+        const departmentIdFromURL = searchParams.get("department");
+        const employeeIdFromURL = searchParams.get("employee");
+        const priorityFromURL = searchParams.get("priority");
+
+        let filteredTasks = data.filter((task) => task.status.name === name);
+
+        if (departmentIdFromURL) {
+          filteredTasks = filteredTasks.filter(
+            (task) => task.department.id.toString() === departmentIdFromURL
+          );
+        }
+
+        if (employeeIdFromURL) {
+          filteredTasks = filteredTasks.filter(
+            (task) => task.employee.id.toString() === employeeIdFromURL
+          );
+        }
+
+        if (priorityFromURL) {
+          filteredTasks = filteredTasks.filter(
+            (task) => task.priority.id.toString() === priorityFromURL
+          );
+        }
+
+        setTasks(filteredTasks); 
       })
       .catch((error) => console.error("Error fetching Tasks:", error));
-  }, [id]);
-  
+  }, [name, searchParams]); 
 
-//   const deleteUser = (t) => {
-//     fetch(`https://momentum.redberryinternship.ge/api/tasks/${id}`, {
-//         method: "DELETE",
-//         headers: {
-//             "Authorization": `Bearer 9e685023-d697-49c2-9442-4c707290d2bf`,
-//             "Content-Type": "application/json",
-//         },
-//     })
-//         .then((res) => {
-//             console.log("Delete response status:", res.status);
-//             if (res.ok) {
-//                 console.log(`User with ID ${id} deleted successfully.`);
-//             } else {
-//                 console.error("Failed to delete user:", res);
-//             }
-//         })
-//         .catch((error) => console.error("Error deleting user:", error));
-// };
-// // Delete user
-// useEffect(() => {
-//     deleteUser(1563);
-// }, []);
-console.log(tasks)
-const navigateToTaskDetail = (taskId) => {
-  navigate(`/task/${taskId}`); 
-};
+  const navigateToTaskDetail = (taskId) => {
+    navigate(`/task/${taskId}`);
+  };
+
   const abbreviateText = (text) => {
     const abbreviations = {
       "ადმინისტრაციის დეპარტამენტი": "ადმინისტრაცია",
@@ -71,36 +99,132 @@ const navigateToTaskDetail = (taskId) => {
     return "";
   };
 
-  const borderChoose = (id) =>{
-    if(id === 1) return "#F7BC30";
-    if(id === 2) return "#FB5607"
-    if(id === 3) return "#FF006E"
-    if(id === 4) return "#3A86FF"
-  }
+  const borderChoose = (id) => {
+    if (id === 1) return "#F7BC30";
+    if (id === 2) return "#FB5607";
+    if (id === 3) return "#FF006E";
+    if (id === 4) return "#3A86FF";
+  };
+
+  const truncateDescription = (description) => {
+    let formattedDescription = description.length > 100 ? description.substring(0, 100) + "..." : description;
+    if (formattedDescription.length > 35) {
+      return formattedDescription.substring(0, 35) + "<br/>" + formattedDescription.substring(35);
+    }
+    return formattedDescription;
+  };
+
+  const removeFilter = (filterName) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete(filterName); 
+    setSearchParams(newSearchParams); 
+  };
+
+  const renderFilters = () => {
+    const departmentIdFromURL = searchParams.get("department");
+    const employeeIdFromURL = searchParams.get("employee");
+    const priorityFromURL = searchParams.get("priority");
+
+    const filters = [];
+
+    if (departmentIdFromURL) {
+      const name = filteredDeps.find((dep) => dep.id.toString() === departmentIdFromURL);
+      filters.push({
+        label: name.name,
+        name: "department",
+        value: departmentIdFromURL,
+      });
+    }
+
+    if (employeeIdFromURL) {
+      const name = filteredEmps.find((emp) => emp.id.toString() === employeeIdFromURL);
+      if (name) {
+        filters.push({
+          label: `${name.name} ${name.surname}`, 
+          name: "employee",
+          value: employeeIdFromURL,
+        });
+      }
+    }
+    
+
+    if (priorityFromURL) {
+      const name = filteredPris.find((pri) => pri.id.toString() === priorityFromURL);
+    
+      filters.push({
+        label: name.name,
+        name: "priority",
+        value: priorityFromURL,
+      });
+    }
+
+    return filters.length > 0 ? (
+      <div className="active-filters">
+        {filters.map((filter) => (
+          <span key={filter.name} className="filter-tag">
+            {filter.label}
+            <button
+              onClick={() => removeFilter(filter.name)}
+              className="remove-filter"
+            >
+              X
+            </button>
+          </span>
+        ))}
+      </div>
+    ) : null;
+  };
 
   return (
     <div>
+
+      {renderFilters()}
+
       {tasks.length > 0 ? (
         tasks.map((task) => (
-          <div onClick={() => navigateToTaskDetail(task.id)} style={{border: `1px solid ${borderChoose(id)}`}} key={task.id} className={`task-${task.id} task`}>
+          <div
+            onClick={() => navigateToTaskDetail(task.id)}
+            style={{ border: `1px solid ${borderChoose(id)}` }}
+            key={task.id}
+            className={`task-${task.id} task`}
+          >
             <div className={`task-header-${task.id} task-header`}>
               <div style={{ display: "flex", gap: "10px" }}>
-                <div style={{ padding: "5px 10px", borderRadius: "10px" }} className={getPriorityClass(task.priority.name)}>
+                <div
+                  style={{ padding: "5px 10px", borderRadius: "10px" }}
+                  className={getPriorityClass(task.priority.name)}
+                >
                   <img src={task.priority.icon} alt="" id="priIcon" />
                   <label htmlFor="priIcon">{task.priority.name}</label>
                 </div>
 
-                <div style={{ background: '#FF66A8', padding: "5px 10px", borderRadius: "25px", color: 'white' }}>
+                <div
+                  style={{
+                    background: "#FF66A8",
+                    padding: "5px 10px",
+                    borderRadius: "25px",
+                    color: "white",
+                  }}
+                >
                   {abbreviateText(task.department.name)}
                 </div>
               </div>
-              <div style={{ fontSize: "12px", marginTop: '8px' }}>
+              <div style={{ fontSize: "12px", marginTop: "8px" }}>
                 {format(new Date(task.due_date), "dd MMM, yy", { locale: ka })}
               </div>
             </div>
             <div className={`task-main-${task.id} task-main`}>
               <h4>{task.name}</h4>
-              <p style={{ marginTop: "10px" }}>{task.description}</p>
+              <p
+                style={{
+                  marginTop: "10px",
+                  maxWidth: "100%",
+                  overflowWrap: "break-word",
+                  wordBreak: "break-word",
+                }}
+              >
+                <span dangerouslySetInnerHTML={{ __html: truncateDescription(task.description) }} />
+              </p>
             </div>
             <div className={`task-footer-${task.id} task-footer`}>
               <div>
@@ -112,6 +236,7 @@ const navigateToTaskDetail = (taskId) => {
               </div>
             </div>
           </div>
+          
         ))
       ) : (
         null

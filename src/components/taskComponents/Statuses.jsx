@@ -9,7 +9,6 @@ export default function Statuses() {
       .then((res) => res.json())
       .then((data) => setStatuses(data));
   }, []);
-  console.log(statuses)
   return (
     <>
       <div className="statuses">
