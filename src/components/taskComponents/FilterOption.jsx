@@ -15,7 +15,6 @@ export default function FilterOption() {
   const [filteredPris, setFilteredPris] = useState([]);
   const [filteredEmps, setFilteredEmps] = useState([]);
   const navigate = useNavigate()
-  // Fetch the data
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/departments")
       .then((res) => res.json())
@@ -58,20 +57,16 @@ export default function FilterOption() {
     setDep(false);
     setPri(false);
   }
-
-  // Remove filters from URL searchParams and close filter dropdowns
   function removeFilter(filterName) {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.delete(filterName);
     setSearchParams(newSearchParams);
 
-    // Close filter dropdowns after removing filter
     setDep(false)
     setPri(false)
     setEmp(false)
   }
 
-  // Update state based on searchParams
   useEffect(() => {
     setDep(false)
     setPri(false)

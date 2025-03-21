@@ -1,4 +1,4 @@
-import { useState, useEffect, use} from 'react';
+import { useState, useEffect} from 'react';
 import { format } from "date-fns";
 import { ka } from "date-fns/locale";
 import { Timer } from 'lucide-react';
@@ -52,7 +52,7 @@ export default function TaskDetail({taskId}) {
     });
     
     
-  })
+  }, [taskId])
 
 
   useEffect(() => {

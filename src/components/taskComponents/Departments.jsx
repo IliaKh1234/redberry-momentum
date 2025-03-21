@@ -6,7 +6,7 @@ export default function Departments() {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Fetch department data
+
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/departments")
       .then((res) => res.json())

@@ -3,10 +3,10 @@ import { useSearchParams } from "react-router-dom";
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(null); // Only one employee can be selected
+  const [selectedEmployee, setSelectedEmployee] = useState(null); 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Fetch employee data
+
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/employees", {
       method: "GET",

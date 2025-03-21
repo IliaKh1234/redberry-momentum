@@ -8,33 +8,6 @@ export default function GetTasks({ id, name }) {
   const [tasks, setTasks] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams(); 
   const navigate = useNavigate();
-  const [filteredDeps, setFilteredDeps] = useState([])
-  const [filteredPris, setFilteredPris] = useState([])
-  const [filteredEmps, setFilteredEmps] = useState([])
-
-  useEffect(() => {
-    fetch("https://momentum.redberryinternship.ge/api/departments")
-      .then((res) => res.json())
-      .then((data) => setFilteredDeps(data));
-  }, [searchParams])
-
-  useEffect(() => {
-    fetch("https://momentum.redberryinternship.ge/api/priorities")
-      .then((res) => res.json())
-      .then((data) => setFilteredPris(data));
-  }, [searchParams])
-
-  useEffect(() => {
-    fetch("https://momentum.redberryinternship.ge/api/employees", {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer 9e685023-d697-49c2-9442-4c707290d2bf`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setFilteredEmps(data))
-  }, [searchParams])
 
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/tasks", {
@@ -116,9 +89,6 @@ export default function GetTasks({ id, name }) {
 
   return (
     <div>
-
-      
-
       {tasks.length > 0 ? (
         tasks.map((task) => (
           <div

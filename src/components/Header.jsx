@@ -2,7 +2,7 @@ import logo from '../images/logo.png'
 import hourGlass from "../images/Hourglass.png"
 import { useState, useEffect } from "react";
 import AddEmployee from './taskComponents/AddEmployee';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Header(){
