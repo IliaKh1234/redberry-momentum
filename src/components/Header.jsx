@@ -17,8 +17,9 @@ export default function Header(){
         }, [addOpen]);
     
         const handleAddTask = () => {
-            window.location.href = '/create-task'; 
-        }
+            navigate("/create-task"); 
+        };
+        
         const handleLogoClick = () => {
             navigate("/"); 
           };
