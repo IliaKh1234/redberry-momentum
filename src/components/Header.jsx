@@ -19,13 +19,15 @@ export default function Header(){
         const handleAddTask = () => {
             window.location.href = '/create-task'; 
         }
-
+        const handleLogoClick = () => {
+            navigate("/"); 
+          };
 
     return (
         <>
         <div className={`header-parent ${addOpen ? 'blur' : ''}`}>
             <div className='logo-parent'>
-                <img src={logo} alt="logo" />
+                <img style={{cursor: 'pointer'}} onClick={handleLogoClick} src={logo} alt="logo" />
                 <img style={{ marginBottom: "-5px" }} src={hourGlass} alt="hourGlass" />
             </div>
             <div className='buttons'>

@@ -4,8 +4,8 @@ import Left from "../../images/Left.png";
 export default function TaskComments({ taskId }) {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const [repliedTo, setRepliedTo] = useState(null); // Track the comment being replied to
-  const [replyText, setReplyText] = useState(""); // Text for reply input
+  const [repliedTo, setRepliedTo] = useState(null); 
+  const [replyText, setReplyText] = useState(""); 
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -31,9 +31,9 @@ export default function TaskComments({ taskId }) {
   const handleReply = (commentId) => {
     const commentToReplyTo = comments.find((comment) => comment.id === commentId);
 
-    // Only allow reply if the comment has no sub_comments
+
     if (commentToReplyTo && (!commentToReplyTo.sub_comments || commentToReplyTo.sub_comments.length === 0)) {
-      setRepliedTo(commentId); // Allow reply for this comment
+      setRepliedTo(commentId);
     } else {
       alert('You can only reply to a comment with no subcomments.');
     }
@@ -94,7 +94,6 @@ export default function TaskComments({ taskId }) {
         setComments((prevComments) => {
           return prevComments.map((comment) => {
             if (comment.id === commentId) {
-              // Check if sub_comments exist or initialize an empty array if not
               return {
                 ...comment,
                 sub_comments: comment.sub_comments ? [...comment.sub_comments, newReply] : [newReply],
@@ -104,7 +103,7 @@ export default function TaskComments({ taskId }) {
           });
         });
         setReplyText(""); 
-        setRepliedTo(null); // Reset after reply
+        setRepliedTo(null); 
       } else {
         alert("Failed to post reply.");
       }
@@ -144,19 +143,18 @@ export default function TaskComments({ taskId }) {
                 <p>{comment.text}</p>
               </div>
               <div className='reply-comment'>
-                {/* Only show the reply button if the comment has no sub_comments */}
                 {(!comment.sub_comments || comment.sub_comments.length === 0) && (
                   <button onClick={() => handleReply(comment.id)}><img src={`${Left}`} alt="" /> უპასუხე</button>
                 )}
                 {repliedTo === comment.id && (
-                  <div>
-                    <input
-                      type="text"
-                      value={replyText}
-                      onChange={(e) => setReplyText(e.target.value)}
-                      placeholder="Write your reply..."
-                    />
-                    <button onClick={() => postReply(comment.id)}>Submit Reply</button>
+                  <div style={{position: "relative"}}>
+                    <textarea
+                    id='writeComment'
+                    value={replyText}
+                    onChange={(e) => setReplyText(e.target.value)}
+                    placeholder='უპასუხე'
+                  ></textarea>
+                    <button className='reply-button' onClick={() => postReply(comment.id)}>Submit Reply</button>
                   </div>
                 )}
               </div>

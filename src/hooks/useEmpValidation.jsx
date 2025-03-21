@@ -49,7 +49,6 @@ const useEmpValidation = () => {
         break;
 
       case 'lastName':
-        // Similar logic for last name
         if (value.length < 2) {
           setErrors((prev) => ({ ...prev, lastName: 'Last name must be at least 2 characters.' }));
           setLabelColors((prev) => ({ ...prev, lastNameMinLength: 'red' }));
@@ -74,7 +73,6 @@ const useEmpValidation = () => {
         break;
 
       case 'avatar':
-        // Avatar validation logic...
         break;
 
       case 'department':

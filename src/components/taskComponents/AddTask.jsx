@@ -22,10 +22,11 @@ export default function AddTask() {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [id]: value,  
-        }));
+        setFormData((prevData) => {
+            const updatedData = { ...prevData, [id]: value };
+            localStorage.setItem('formData', JSON.stringify(updatedData)); 
+            return updatedData;
+        });
         validate(id, value);  
     };
 
@@ -38,6 +39,7 @@ export default function AddTask() {
             ...prevData,
             chooseDepartment: value,  
         }));
+        localStorage.setItem('formData', JSON.stringify({ ...formData, chooseDepartment: value })); // Update localStorage
     };
 
     const handlePriorityChange = (selectedOption) => {
@@ -45,6 +47,7 @@ export default function AddTask() {
             ...prevData,
             choosePriority: selectedOption.value
         }));
+        localStorage.setItem('formData', JSON.stringify({ ...formData, choosePriority: selectedOption.value })); // Update localStorage
     };
 
     const handleStatusChange = (selectedOption) => {
@@ -52,6 +55,7 @@ export default function AddTask() {
             ...prevData,
             chooseStatus: selectedOption.value
         }));
+        localStorage.setItem('formData', JSON.stringify({ ...formData, chooseStatus: selectedOption.value })); // Update localStorage
     };
 
     const handleSubmit = (e) => {
@@ -60,7 +64,7 @@ export default function AddTask() {
         if (formData.chooseEmployeeFor === "") {
             alert("აირჩიეთ თანამშრომელი");
             return;
-        }else{
+        } else {
             const taskData = {
                 name: formData.taskTitle,
                 description: formData.taskDescription,
@@ -69,7 +73,7 @@ export default function AddTask() {
                 employee_id: formData.chooseEmployeeFor,
                 priority_id: formData.choosePriority,
             };
-    
+
             fetch("https://momentum.redberryinternship.ge/api/tasks", {
                 method: "POST",
                 headers: {
@@ -82,16 +86,30 @@ export default function AddTask() {
             .then((data) => {
                 console.log("Task created successfully:", data);
                 alert("Task created successfully!");
+                localStorage.removeItem('formData'); 
+                setFormData({ 
+                    taskTitle: "",
+                    taskDescription: "",
+                    choosePriority: "2",
+                    chooseStatus: "1",
+                    chooseDepartment: "",
+                    chooseEmployeeFor: "",
+                    deadLine: ""
+                });
             })
             .catch((error) => {
                 console.error("Error creating task:", error);
                 alert("Error creating task.");
             });
         }
-
-        
     };
+
     useEffect(() => {
+        const storedFormData = JSON.parse(localStorage.getItem('formData'));
+        if (storedFormData) {
+            setFormData(storedFormData);
+        }
+
         fetch("https://momentum.redberryinternship.ge/api/priorities")
             .then((res) => res.json())
             .then((data) => setPriorities(data));
@@ -116,15 +134,15 @@ export default function AddTask() {
                 setEmployees(data);
                 setFilteredEmployees(data); 
             });
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            const formattedDate = tomorrow.toISOString().split('T')[0]; 
-            setFormData((prevData) => ({
-                ...prevData,
-                deadLine: formattedDate 
-            }));
-    }, []);
 
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const formattedDate = tomorrow.toISOString().split('T')[0]; 
+        setFormData((prevData) => ({
+            ...prevData,
+            deadLine: formattedDate 
+        }));
+    }, []);
 
     const priorityOptions = priorities.map((priority) => ({
         value: priority.id,
@@ -136,17 +154,6 @@ export default function AddTask() {
         value: stat.id,
         label: stat.name
     }));
-
-    const customPriorityOption = (props) => {
-        const { data, innerRef, innerProps } = props;
-        return (
-            <div ref={innerRef} {...innerProps} style={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                <img src={data.icon} alt={data.label} style={{ width: '20px', marginRight: '10px' }} />
-                {data.label}
-            </div>
-        );
-    };
-
     return (
         <div className="create-task-parent">
             <h1 style={{ margin: "20px 0 30px 120px" }}>შექმნი ახალი დავალება</h1>

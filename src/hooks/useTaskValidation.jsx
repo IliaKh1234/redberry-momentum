@@ -14,7 +14,6 @@ const useTaskValidation = () => {
     deadLine: "#6C757D",
   });
 
-  // Validation function for each field
   const validate = (id, value) => {
     switch (id) {
       case "taskTitle":

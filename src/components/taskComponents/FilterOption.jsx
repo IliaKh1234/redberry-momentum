@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import Departments from "./Departments";
 import Priorities from "./Priorities";
 import Employees from "./Employees";
@@ -14,7 +14,7 @@ export default function FilterOption() {
   const [filteredDeps, setFilteredDeps] = useState([]);
   const [filteredPris, setFilteredPris] = useState([]);
   const [filteredEmps, setFilteredEmps] = useState([]);
-
+  const navigate = useNavigate()
   // Fetch the data
   useEffect(() => {
     fetch("https://momentum.redberryinternship.ge/api/departments")
@@ -73,10 +73,6 @@ export default function FilterOption() {
 
   // Update state based on searchParams
   useEffect(() => {
-    const department = searchParams.get("department");
-    const priority = searchParams.get("priority");
-    const employee = searchParams.get("employee");
-
     setDep(false)
     setPri(false)
     setEmp(false)
@@ -126,6 +122,7 @@ export default function FilterOption() {
             <span onClick={() => removeFilter(filter.name)} className="filter-span">{filter.label} <X/></span>
           </div>
         ))}
+        <span onClick={() => navigate('/')} className="clear-filters">გასუფთავება</span>
       </div>
     ) : null;
   }

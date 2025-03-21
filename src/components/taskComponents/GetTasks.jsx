@@ -114,68 +114,6 @@ export default function GetTasks({ id, name }) {
     return formattedDescription;
   };
 
-  const removeFilter = (filterName) => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.delete(filterName); 
-    setSearchParams(newSearchParams); 
-  };
-
-  function renderFilters() {
-    const departmentIdFromURL = searchParams.get("department");
-    const employeeIdFromURL = searchParams.get("employee");
-    const priorityFromURL = searchParams.get("priority");
-  
-    const filters = [];
-    if (departmentIdFromURL && filteredDeps.length > 0) {
-      const name = filteredDeps.find((dep) => dep.id.toString() === departmentIdFromURL);
-      if (name) {
-        filters.push({
-          label: name.name,
-          name: "department",
-          value: departmentIdFromURL,
-        });
-      }
-    }
-  
-    if (employeeIdFromURL && filteredEmps.length > 0) {
-      const name = filteredEmps.find((emp) => emp.id.toString() === employeeIdFromURL);
-      if (name) {
-        filters.push({
-          label: `${name.name} ${name.surname}`,
-          name: "employee",
-          value: employeeIdFromURL,
-        });
-      }
-    }
-  
-    if (priorityFromURL && filteredPris.length > 0) {
-      const name = filteredPris.find((pri) => pri.id.toString() === priorityFromURL);
-      if (name) {
-        filters.push({
-          label: name.name,
-          name: "priority",
-          value: priorityFromURL,
-        });
-      }
-    }
-  
-    return filters.length > 0 ? (
-      <div className="active-filters">
-        {filters.map((filter) => (
-          <span key={filter.name} className="filter-tag">
-            {filter.label}
-            <button
-              onClick={() => removeFilter(filter.name)}
-              className="remove-filter"
-            >
-              X
-            </button>
-          </span>
-        ))}
-      </div>
-    ) : null;
-  };
-
   return (
     <div>
 
