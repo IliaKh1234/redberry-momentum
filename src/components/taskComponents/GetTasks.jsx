@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function GetTasks({ id, name }) {
   const [tasks, setTasks] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams(); 
+  const [searchParams] = useSearchParams(); 
   const navigate = useNavigate();
 
   useEffect(() => {
