@@ -120,44 +120,45 @@ export default function GetTasks({ id, name }) {
     setSearchParams(newSearchParams); 
   };
 
-  const renderFilters = () => {
+  function renderFilters() {
     const departmentIdFromURL = searchParams.get("department");
     const employeeIdFromURL = searchParams.get("employee");
     const priorityFromURL = searchParams.get("priority");
-
+  
     const filters = [];
-
-    if (departmentIdFromURL) {
+    if (departmentIdFromURL && filteredDeps.length > 0) {
       const name = filteredDeps.find((dep) => dep.id.toString() === departmentIdFromURL);
-      filters.push({
-        label: name.name,
-        name: "department",
-        value: departmentIdFromURL,
-      });
+      if (name) {
+        filters.push({
+          label: name.name,
+          name: "department",
+          value: departmentIdFromURL,
+        });
+      }
     }
-
-    if (employeeIdFromURL) {
+  
+    if (employeeIdFromURL && filteredEmps.length > 0) {
       const name = filteredEmps.find((emp) => emp.id.toString() === employeeIdFromURL);
       if (name) {
         filters.push({
-          label: `${name.name} ${name.surname}`, 
+          label: `${name.name} ${name.surname}`,
           name: "employee",
           value: employeeIdFromURL,
         });
       }
     }
-    
-
-    if (priorityFromURL) {
+  
+    if (priorityFromURL && filteredPris.length > 0) {
       const name = filteredPris.find((pri) => pri.id.toString() === priorityFromURL);
-    
-      filters.push({
-        label: name.name,
-        name: "priority",
-        value: priorityFromURL,
-      });
+      if (name) {
+        filters.push({
+          label: name.name,
+          name: "priority",
+          value: priorityFromURL,
+        });
+      }
     }
-
+  
     return filters.length > 0 ? (
       <div className="active-filters">
         {filters.map((filter) => (
@@ -178,7 +179,7 @@ export default function GetTasks({ id, name }) {
   return (
     <div>
 
-      {renderFilters()}
+      
 
       {tasks.length > 0 ? (
         tasks.map((task) => (

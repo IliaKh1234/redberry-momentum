@@ -637,3 +637,27 @@ border: 1px solid #DEE2E6;
 
 /* change icons to original iconns */
 
+.active-filters{
+  display: flex;
+  margin-top: 20px;
+  margin-left: 120px;
+  gap: 10px;
+}
+.filter-span{
+  width: 200px;
+  height: 29px;
+  gap: 4px;
+  border-radius: 43px;
+  border-width: 1px;
+  padding-top: 6px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  border: 1px solid #CED4DA;
+  cursor: pointer;
+  
+}
+.filter-span svg{
+  color: #343A40;
+  margin-bottom: -6px;
+}
